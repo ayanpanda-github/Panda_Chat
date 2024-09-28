@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc -b"
   },
   "keywords": [],
   "author": "",
@@ -39,6 +39,7 @@
     "electron-to-chromium": "^1.5.29",
     "emoji-regex": "^9.2.2",
     "escalade": "^3.2.0",
+    "express": "^4.21.0",
     "fast-glob": "^3.3.2",
     "fastq": "^1.17.1",
     "fill-range": "^7.1.1",
@@ -94,6 +95,7 @@
     "shebang-command": "^2.0.0",
     "shebang-regex": "^3.0.0",
     "signal-exit": "^4.1.0",
+    "socket.io": "^4.8.0",
     "source-map-js": "^1.2.1",
     "string-width": "^5.1.2",
     "string-width-cjs": "^4.2.3",
