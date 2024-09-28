@@ -1,4 +1,5 @@
 import { Socket } from "socket.io";
+import { RoomManager } from "./RoomManager";
 
 
 
@@ -10,9 +11,11 @@ export interface User{
 export class userManager{
     private users: User[];
     private queue: string[];
+    private roomManager: RoomManager;
     constructor(){
         this.users  = [];
         this.queue = [];
+        this.roomManager = new RoomManager();
     }
     addUser(name:string, socket: Socket){
         this.users.push({
@@ -20,6 +23,7 @@ export class userManager{
         })
         this.queue.push(socket.id);
         this.clearQueue();
+        this.initHandler(socket);
     }
 
     removeUser(socketID: string){
@@ -30,12 +34,25 @@ export class userManager{
         if (this.queue.length < 2){
             return;
         }
+
         const user1 = this.users.find(x => x.socket.id === this.queue.pop());
         const user2 = this.users.find(x => x.socket.id === this.queue.pop());
         
-        user1?.socket.emit("new-room",{
-            type:"send-offer",
-            
+        if(!user1 || !user2){
+            return;
+        }
+
+        const room = this.roomManager.createRoom(user1, user2);
+        
+        
+    }
+
+    initHandler(socket: Socket){
+        socket.on("offer", ({sdp, roomId}:{sdp: string, roomId: string}) =>{
+            this.roomManager.onOffer(roomId,sdp)
+        })
+        socket.on("answer", ({sdp, roomId}:{sdp: string, roomId: string}) =>{
+            this.roomManager.onAnswer(roomId,sdp)
         })
     }
 
