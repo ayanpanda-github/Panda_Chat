@@ -1,8 +1,6 @@
 import { Socket } from "socket.io";
 import { RoomManager } from "./RoomManager";
 
-
-
 export interface User{
     socket: Socket; 
     name: string;
@@ -37,8 +35,10 @@ export class UserManager{
             return;
         }
 
-        const user1 = this.users.find(x => x.socket.id === this.queue.pop());
-        const user2 = this.users.find(x => x.socket.id === this.queue.pop());
+        const id1 =this.queue.pop();
+        const id2 = this.queue.pop(); 
+        const user1 = this.users.find(x => x.socket.id === id1 );
+        const user2 = this.users.find(x => x.socket.id === id2 );
         
         if(!user1 || !user2){
             return;

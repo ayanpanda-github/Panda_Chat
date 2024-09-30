@@ -14,7 +14,7 @@ export class RoomManager{
         this.rooms = new Map<string, Room>()
     }
     createRoom(user1: User, user2: User){
-        const roomId = this.generate();
+        const roomId = this.generate().toString();
         this.rooms.set(roomId.toString(),{
             user1,
             user2
@@ -30,7 +30,6 @@ export class RoomManager{
     
     // deleteRoom(roomId){
     //     const room = this.rooms.find(x => x.roomId === roomId);
-
     // }   
 
     onOffer(roomId: string, sdp: string){
