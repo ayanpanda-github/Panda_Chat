@@ -23,6 +23,10 @@ export class RoomManager{
         user1.socket.emit("send-offer",{
             roomId
         })
+        user2.socket.emit("send-offer",{
+            roomId
+        })
+
 
 
              
