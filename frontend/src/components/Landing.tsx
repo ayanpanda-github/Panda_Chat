@@ -5,8 +5,17 @@ export const Landing = () =>{
     const [name, setName] = useState("");
     const [joined, seJoined] = useState(false);
     
-    useEffect(()=>{
+    const getCan = async ()=>{
+        const stream = window.navigator.mediaDevices.getUserMedia({
+            video:true,
+            audio:true
+        })
 
+        const videoTracks = stream.getAudioTracks()[0]
+    }
+
+    useEffect(()=>{
+        getCan();
     }, []);
     
     
