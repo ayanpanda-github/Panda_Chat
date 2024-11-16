@@ -1,15 +1,16 @@
-import { useState } from 'react'
-import './App.css'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Landing } from './components/landing';
-import { Room } from './components/room';
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Landing } from './components/Landing';
+import { Room } from './components/Room';
 
 function App() {
- 
 
   return (
-    <Landing />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
